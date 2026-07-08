@@ -1,0 +1,137 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ============ ПОЛЬЗОВАТЕЛИ ============
+model User {
+  id         String   @id @default(uuid())
+  email      String   @unique
+  password   String
+  name       String
+  role       String   // "organizer" или "participant"
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  createdQuizzes  Quiz[]              @relation("QuizCreator")
+  sessions        SessionParticipant[]
+  answers         UserAnswer[]
+}
+
+// ============ КАТЕГОРИИ ============
+model Category {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String?
+  createdAt   DateTime @default(now())
+
+  quizzes Quiz[]
+}
+
+// ============ КВИЗЫ ============
+model Quiz {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  timeLimit   Int?     // в секундах
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  categoryId   String?
+  createdById  String
+
+  // Связи
+  category   Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  creator    User     @relation("QuizCreator", fields: [createdById], references: [id], onDelete: Cascade)
+
+  questions  Question[]
+  sessions   QuizSession[]
+}
+
+// ============ ВОПРОСЫ ============
+model Question {
+  id          String   @id @default(uuid())
+  type        String   // "text" или "image"
+  text        String
+  imageUrl    String?
+  isMultiple  Boolean  @default(false)
+  points      Int      @default(1)
+  order       Int
+
+  quizId      String
+
+  // Связи
+  quiz      Quiz       @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  options   Option[]
+  answers   UserAnswer[]
+}
+
+// ============ ВАРИАНТЫ ОТВЕТОВ ============
+model Option {
+  id          String   @id @default(uuid())
+  text        String
+  isCorrect   Boolean  @default(false)
+  order       Int
+
+  questionId  String
+
+  // Связи
+  question Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+}
+
+// ============ СЕССИИ (КОМНАТЫ) ============
+model QuizSession {
+  id          String   @id @default(uuid())
+  code        String   @unique
+  status      String   @default("waiting") // waiting | active | finished
+  currentQuestionIndex Int?
+  startedAt   DateTime?
+  endedAt     DateTime?
+  createdAt   DateTime @default(now())
+
+  quizId      String
+
+  // Связи
+  quiz         Quiz                  @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  participants SessionParticipant[]
+  answers      UserAnswer[]
+}
+
+// ============ УЧАСТИЕ В СЕССИИ ============
+model SessionParticipant {
+  id          String   @id @default(uuid())
+  joinedAt    DateTime @default(now())
+  finalScore  Int      @default(0)
+
+  sessionId   String
+  userId      String
+
+  // Связи
+  session QuizSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  user    User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([sessionId, userId])
+}
+
+// ============ ОТВЕТЫ ПОЛЬЗОВАТЕЛЕЙ ============
+model UserAnswer {
+  id             String   @id @default(uuid())
+  selectedOptions Json     // массив ID вариантов (или объект с данными)
+  isCorrect      Boolean?
+  pointsEarned   Int      @default(0)
+  answeredAt     DateTime @default(now())
+
+  sessionId   String
+  userId      String
+  questionId  String
+
+  // Связи
+  session  QuizSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  user     User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  question Question    @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([sessionId, userId, questionId])
+}
