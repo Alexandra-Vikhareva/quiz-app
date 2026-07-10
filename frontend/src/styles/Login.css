@@ -271,17 +271,12 @@ body::after {
   border-radius: 8px;
   color: #991b1b;
   margin-bottom: 16px;
-  animation: shake 0.2s ease-in-out 0s 2;
   position: sticky;
   top: 10px;
   z-index: 10;
-}
-
-.error__icon {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
-  stroke: #dc2626;
+  max-width: 450px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .error__text {
