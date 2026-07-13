@@ -15,5 +15,33 @@
     --color-background: #F8FAFC;
     --color-background-secondary: #F0F3FF;
 
+    --color-error-bg: #fef2f2;
+    --color-error-border: #fecaca;
+    --color-error-text: #991b1b;
+
+    --color-card-border: rgba(199, 196, 216, 0.3);
+    --color-toggle-bg: #E7EEFE;
+
+    --color-brand-dark: #3525CD;
+    --color-warm-dark: #684000;
+    --color-warm-end: #885500;
+    --color-hero-glow-2: #8A4CFC;
+
+    --color-white-alpha-10: rgba(255, 255, 255, 0.1);
+    --color-white-alpha-20: rgba(255, 255, 255, 0.2);
+    --color-options-text: #DAD7FF;
+
+    --color-border-light: #C7C4D8;
+    --color-warm-alpha-20: rgba(136, 85, 0, 0.2);
+
+    --color-reward-glow: rgba(255, 221, 184, 0.8);
+    --color-reward-text: #FFDDB8;
+
+    --color-rank-bg: #FFDDB8;
+    --color-rank-text: #2A1700;
+
+    --color-logo-category-bg: #E2E8F8;
+    --color-live-bg: rgba(53, 37, 205, 0.1);
+
     font-family: Inter;
 }

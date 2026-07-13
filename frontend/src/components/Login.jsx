@@ -28,7 +28,7 @@ function Login() {
   };
 
   return (
-    <>
+    <div className='login-page'>
       {error && (
         <div className="error">
           <svg className="error__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -137,7 +137,7 @@ function Login() {
           Don't have an account? <a href="#" className="login__signup-link">Sign Up</a>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

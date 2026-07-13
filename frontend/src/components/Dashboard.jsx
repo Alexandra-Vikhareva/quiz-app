@@ -1,6 +1,8 @@
+import UserDashboard from "./UserDashboard"
+
 function Dashboard() {
     return (
-        <div>Dashboard</div>
+        <UserDashboard></UserDashboard>
     )
 }
 

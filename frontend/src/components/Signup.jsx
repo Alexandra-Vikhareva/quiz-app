@@ -38,7 +38,7 @@ function Signup() {
 
   return (
 
-    <>
+    <div className='signup-page'>
         {error && (
             <div className="error">
             <span className="error__text">{error}</span>
@@ -215,7 +215,7 @@ function Signup() {
             </div>
         </section>
         </div>
-  </>
+  </div>
   );
 }
 

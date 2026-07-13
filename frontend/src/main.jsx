@@ -4,8 +4,16 @@ import './index.css'
 import App from './App.jsx'
 import './styles/variables.css'
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+async function enableMocking() {
+  if (import.meta.env.MODE !== 'development') return;
+  const { worker } = await import('./mocks/browser');
+  return worker.start({ onUnhandledRequest: 'bypass' });
+}
+
+enableMocking().then(() => {
+  createRoot(document.getElementById('root')).render(
+    <StrictMode>
+      <App />
+    </StrictMode>,
+  )
+});
