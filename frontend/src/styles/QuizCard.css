@@ -41,6 +41,8 @@
 .quiz-card__content {
     padding-bottom: 24px;
     border-bottom: 1px solid var(--color-border-light);
+    height: 110px;
+    overflow: hidden;
 }
 
 .quiz-card__content-title{

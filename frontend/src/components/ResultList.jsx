@@ -1,12 +1,11 @@
 import ResultItem from "./ResultItem"
 
-function ResultList() {
+function ResultList({ history }) {
     return(
         <ul className="result-list">
-            <ResultItem />
-            <ResultItem />
-            <ResultItem />
-            <ResultItem />
+            {history.map(item => (
+                <ResultItem key={item.id} item={item}/>
+            ))}
         </ul>
     )
 }

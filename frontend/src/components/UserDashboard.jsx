@@ -1,8 +1,38 @@
+import { useEffect, useState } from 'react';
 import '../styles/UserDashboard.css'
 import QuizCard from './QuizCard.jsx'
 import ResultList from './ResultList.jsx'
+import { fetchRandomQuizzes, fetchHistory } from '../services/quizService.js';
 
 function UserDashboard() {
+    const [quizzes, setQuizzes] = useState([]);
+    const [history, setHistory] =useState([]);
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const loadData = async () => {
+            try {
+                const loadQuizzes = await fetchRandomQuizzes(2);
+                const loadHistory = await fetchHistory();
+                setQuizzes(loadQuizzes);
+                setHistory(loadHistory);
+            } catch (err) {
+                setError('Failed to load data');
+                console.log(err)
+            } finally {
+                setLoading(false)
+            }
+        };
+        loadData()
+    }, [])
+
+    const avrgRank = Math.floor(history.reduce((acc, item) => acc + item.rank, 0) / history.length)
+
+
+    if (loading) return <div>Загрузка...</div>;
+    if (error) return <div>Ошибка: {error}</div>;
+
     return (
         <div className="user-dashboard">
             <div className="user-dashboard__hero">
@@ -59,8 +89,7 @@ function UserDashboard() {
 
                     <div className="user-dashboard__main-left-content">
                         <div className="user-dashboard__main-left-cards">
-                            <QuizCard />
-                            <QuizCard />
+                        {!loading && quizzes.map(quiz => <QuizCard key={quiz.id} quiz={quiz} />)}
                         </div>
 
                         <div className="user-dashboard__main-left-suggestion">
@@ -86,12 +115,12 @@ function UserDashboard() {
                             </svg>
                             <h1>History</h1>
                         </div>
-                        <div className="user-dashboard__main-right-count">12</div>
+                        <div className="user-dashboard__main-right-count">{avrgRank}</div>
                     </div>
 
                     <div className="user-dashboard__main-right-content">
                         <div className="result-list-container">
-                            <ResultList />
+                            <ResultList history={history}/>
                             <div className="result-list__detailed">
                                 View Detailed Performance
                                 <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">

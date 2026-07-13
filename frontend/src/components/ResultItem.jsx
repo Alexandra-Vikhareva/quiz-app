@@ -1,25 +1,35 @@
 import '../styles/ResultItem.css'
+import { formatDistanceToNow} from 'date-fns';
 
-function ResultItem() {
+function ResultItem({ item }) {
+    const date = new Date(item.date);
+    const relativeTime = formatDistanceToNow(date, { addSuffix: true });
+
+    function getOrdinal(n) {
+        const s = ['th','st','nd','rd'];
+        const v = n % 100;
+        return n + (s[(v - 20) % 10] || s[v] || s[0]);
+    }
+
     return(
         <li className="result-item">
             <div className="result-rank">
-                1
+                { item.rank }
             </div>
             <div className="result-info">
                 <h1 className="result-info__title">
-                    Intro to Macroeconomics
+                    { item.quizTitle }
                 </h1>
                 <p className="result-info__date">
-                    2 days ago
+                    {relativeTime}
                 </p>
             </div>
             <div className="result-stats">
                 <div className="result-stats__prop-correct">
-                    98%
+                    {item.percentage}%
                 </div>
                 <div className="result-stats__rank">
-                    Rank: 1st
+                    Rank: {getOrdinal(item.rank)}
                 </div>
             </div>
         </li>
