@@ -51,24 +51,3 @@
     font-size: 12px;
     line-height: 16px;
 }
-
-.result-list__detailed {
-    background-color: var(--color-background-secondary);
-    color: var(--color-brand-dark);
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    align-items: center;
-    padding: 16px;
-    border-radius: 16px;
-    font-weight: 600;
-}
-.result-list__detailed:hover {
-    cursor: pointer;
-}
-
-.result-list__detailed svg {
-    fill: var(--color-brand-dark);
-    height: 20px;
-    width: 20px;
-}

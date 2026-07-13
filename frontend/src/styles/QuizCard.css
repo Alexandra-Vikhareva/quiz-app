@@ -85,4 +85,15 @@
     border-radius: 8px;
     color: var(--color-basic);
     padding: 8px 24px;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+.quiz-card__footer-join:hover {
+    background-color: #2a1fa0;
+    box-shadow: 0 4px 12px rgba(53, 37, 205, 0.3);
+}
+
+.quiz-card__footer-join:active {
+    transform: scale(0.96);
+    background-color: #1f1780;
 }
