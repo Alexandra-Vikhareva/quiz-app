@@ -150,3 +150,72 @@ export const mockHistory = [
     status: 'finished'
   }
 ];
+
+export const organizerQuizzes = [
+  {
+    id: 'org-q1',
+    title: 'JavaScript Основы',
+    description: 'Проверка знаний по основам JavaScript для новичков.',
+    status: 'Published',    // "Published", "Draft", "Archived"
+    questionsCount: 15,
+    participantsCount: 42,
+    createdAt: '2025-01-10T10:00:00Z',
+    updatedAt: '2025-01-14T12:00:00Z',
+    category: 'Технологии',
+  },
+  {
+    id: 'org-q2',
+    title: 'Футбольные правила',
+    description: 'Тест на знание правил футбола и судейства.',
+    status: 'Draft',
+    questionsCount: 10,
+    participantsCount: 0,
+    createdAt: '2025-01-12T14:30:00Z',
+    updatedAt: '2025-01-15T09:00:00Z',
+    category: 'Спорт',
+  },
+  {
+    id: 'org-q3',
+    title: 'Итальянская кухня',
+    description: 'Паста, пицца и десерты – проверьте свои гастрономические знания.',
+    status: 'Published',
+    questionsCount: 20,
+    participantsCount: 28,
+    createdAt: '2025-01-13T09:15:00Z',
+    updatedAt: '2025-01-16T16:00:00Z',
+    category: 'Кулинария',
+  },
+  {
+    id: 'org-q4',
+    title: 'Столицы Европы',
+    description: 'Географический тест на знание столиц европейских государств.',
+    status: 'Archived',
+    questionsCount: 12,
+    participantsCount: 15,
+    createdAt: '2024-12-20T11:00:00Z',
+    updatedAt: '2025-01-05T08:30:00Z',
+    category: 'Путешествия',
+  },
+  {
+    id: 'org-q5',
+    title: 'Основы React',
+    description: 'Тестирование знаний по React хукам, состоянию и компонентам.',
+    status: 'Published',
+    questionsCount: 18,
+    participantsCount: 36,
+    createdAt: '2025-01-14T16:45:00Z',
+    updatedAt: '2025-01-17T10:00:00Z',
+    category: 'Технологии',
+  },
+  {
+    id: 'org-q6',
+    title: 'Живопись Ренессанса',
+    description: 'Искусство 15–16 веков: художники, картины и техники.',
+    status: 'Draft',
+    questionsCount: 8,
+    participantsCount: 0,
+    createdAt: '2025-01-15T11:00:00Z',
+    updatedAt: '2025-01-15T11:00:00Z',
+    category: 'Искусство',
+  },
+];

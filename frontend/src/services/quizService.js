@@ -9,3 +9,8 @@ export const fetchHistory = () => {
   return api.get('/sessions/history')
     .then(res => res.data);
 };
+
+export const fetchOrganizerQuizzes = () => {
+  return api.get('/organizer/quizzes')
+    .then(res => res.data);
+};
