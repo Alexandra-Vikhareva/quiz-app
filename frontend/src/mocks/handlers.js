@@ -1,5 +1,5 @@
 import { http, HttpResponse } from 'msw';
-import { mockQuizzes, mockHistory } from './data';
+import { mockQuizzes, mockHistory, organizerQuizzes } from './data';
 
 export const handlers = [
   // GET /api/quizzes/random?count=2
@@ -14,5 +14,9 @@ export const handlers = [
   // GET /api/sessions/history (с авторизацией – токен игнорируем)
   http.get('/api/sessions/history', () => {
     return HttpResponse.json(mockHistory);
+  }),
+
+  http.get('/api/organizer/quizzes', () => {
+    return HttpResponse.json(organizerQuizzes);
   }),
 ];
