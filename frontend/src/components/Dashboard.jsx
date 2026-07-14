@@ -1,8 +1,8 @@
-import UserDashboard from "./UserDashboard"
+import OrganizerDashboard from "./OrganizerDashboard"
 
 function Dashboard() {
     return (
-        <UserDashboard></UserDashboard>
+        <OrganizerDashboard></OrganizerDashboard>
     )
 }
 
